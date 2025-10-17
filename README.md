@@ -1,11 +1,13 @@
 # Multi-species Bacterial Dynamics — Competition & Commensalism
 
-This repository contains Python implementations of **2D diffusion–advection–reaction** models for multi‑species bacterial systems with **pressure‑driven movement** and **nutrient dynamics**, under two ecological scenarios:
+This repository contains Python implementations of **2D cross-diffusion–reaction** models for multi‑species bacterial systems with **pressure‑driven movement** and **nutrient dynamics**, under three ecological scenarios:
 
-1. **Competition** — three populations compete for *space* (via pressure) and a *shared nutrient*.
-2. **Commensalism** — a chain where species transform substrates used by the next species.
+1. **Competition** — three populations compete for a *shared nutrient* and for *space* (via pressure).
+2. **Competition** — two populations compete for a *shared nutrient* and for *space* (via pressure), and they work with different growth strategies (yield vs. growth strategist).
+3. **Commensalism** — a food chain where species transform substrates used by the next species.
 
 Both solvers use a method‑of‑lines discretisation and `scipy.integrate.solve_ivp` for time integration.
+More information on the numerical implementation can be found in Appendix A of the paper [link].
 
 ---
 
@@ -13,7 +15,8 @@ Both solvers use a method‑of‑lines discretisation and `scipy.integrate.solve
 
 ```
 .
-├── competition.py      # Competition: 3 species, 1 shared substrate
+├── competition3.py      # Competition: 3 species, 1 shared substrate
+├── competition2.py      # Competition: 2 species, 1 shared substrate, different growth strategies
 ├── commensalism.py     # Commensalism: 3 species, 3 linked substrates (C1→C2→C3)
 └── README.md
 ```
@@ -29,7 +32,7 @@ Both solvers use a method‑of‑lines discretisation and `scipy.integrate.solve
 
 ### Population pressure and movement
 - **Pressure:** $P_r=P_1+P_2+P_3$.  
-- **Negative chemotaxis:** drift **down** the pressure gradient (repulsion). In flux form this is represented by
+- **Barotaxis:** drift **down** the pressure gradient. In flux form this is represented by
   $$
   \nabla \cdot \big(D_i \nabla P_i - A_i P_i \nabla P_r \big),
   $$
@@ -56,7 +59,14 @@ $$
 
 ---
 
-## 2) Commensalism model
+## 1) Competition model
+
+### Similar to 1) with i=1,2
+> **Note:** Different initial setup than in the previous competition case.
+
+---
+
+## 3) Commensalism model
 
 ### State variables
 - $P_1,P_2,P_3$: bacterial densities.  
@@ -108,7 +118,8 @@ pip install numpy scipy matplotlib
 
 ### Execute
 ```bash
-python competition.py     # Competition scenario
+python competition3.py     # Competition, 3 species scenario
+python competition2.py     # Competition, 2 species scenario
 python commensalism.py    # Commensalism scenario
 ```
 
@@ -123,7 +134,7 @@ Each script:
 
 - **Stability:** start with moderate time horizons and grid sizes; refine as needed.  
 - **Parameters:** tune $D_i$, $A_i$, and the kinetics in $F_i, G$/$G_j$ to explore regimes.  
-- **Boundaries:** defaults are no‑flux; adapt to Dirichlet/periodic if desired.  
+- **Boundaries:** defaults are Neumann boundary conditions; adapt to Dirichlet/periodic if desired.  
 - **Performance:** vectorise fluxes and consider stiff integrators (`LSODA`, `BDF`) for demanding settings.
 
 
