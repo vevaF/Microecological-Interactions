@@ -33,9 +33,9 @@ More information on the numerical implementation can be found in the appendix of
 - **Diffusion**
 - **Pressure-driven directed movement:** drift **down** the gradient of the total population density, where the pressure is defined as $P_r:=\alpha (P_1+P_2+P_3)$.
 - In flux form this is represented by
-\[
+$$
   \nabla \cdot \big(D_i \nabla P_i - A_i P_i \nabla P_r \big),
-\]
+$$
   for the $i$-th population, where $D_i$ is the diffusion coefficient and $A_i$ the sensitivity to the pressure.
 
 ### Substrate movement
@@ -52,16 +52,19 @@ More information on the numerical implementation can be found in the appendix of
 
 ### Governing equations
 **Bacteria ($i=1,2,3$):**
-\[
+
+$$
 \frac{\partial P_i}{\partial t}
 = \nabla \cdot \big(D_i \nabla P_i - A_i P_i \nabla P_r \big) + F_i(P_1,P_2,P_3,C).
-\]
+$$
 
 **Substrate:**
-\[
+
+$$
 \frac{\partial C}{\partial t}
 = d\,\Delta C - G(P_1,P_2,P_3,C).
-\]
+$$
+
 ---
 
 ## 1) Competition model for two populations
@@ -100,19 +103,21 @@ More information on the numerical implementation can be found in the appendix of
 
 ### Governing equations
 **Bacteria ($i=1,2,3$):**
-\[
+
+$$
 \frac{\partial P_i}{\partial t}
 = \nabla \cdot \big(D_i \nabla P_i - A_i P_i \nabla P_r \big) + F_i \big(P_i,C_i\big).
-\]
+$$
 
 **Substrates:**
-\[
+
+$$
 \begin{aligned}
 \frac{\partial C_1}{\partial t} &= d\,\Delta C_1 - G_1(P_1,C_1),\\[2pt]
 \frac{\partial C_2}{\partial t} &= d\,\Delta C_2 - G_2(P_2,C_2) + H_2(P_1, C_1),\\[2pt]
 \frac{\partial C_3}{\partial t} &= d\,\Delta C_3 - G_3(P_3,C_3) + H_3(P_2, C_2) .
 \end{aligned}
-\]
+$$
 
 ## Contact
 
