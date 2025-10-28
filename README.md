@@ -63,7 +63,7 @@ $$
 
 ---
 
-## 1) Competition model for two populations
+## 2) Competition model for two populations
 
 ### Similar to 1) with i=1,2
 > **Note:** Different initial setup than in the previous competition case.
