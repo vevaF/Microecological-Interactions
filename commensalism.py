@@ -93,7 +93,7 @@ r3 = 1
 b1 = 0.1
 b2 = 0.1
 b3 = 0.1
-sig = 10     # yield coefficients; in paper: Y1=Y2=Y3 =: sig
+sig = 1/10     # yield coefficients; in paper: Y1=Y2=Y3 =: sig
 sigma = 0.5 # conversion rate of one substrate into another
 
 # Substrate boundary “inflow/outflow” strengths
@@ -275,9 +275,9 @@ def rhsode(t, y):
         print('The flux is not 0! ' + str(sum(sum(dP1dt))))
 
     # Substrate kinetics (commensal chain)
-    kinetics_C1 = -sig * r1 * P1 * C1 / (K1 + C1 + eps)
-    kinetics_C2 =  sig*sigma * r1 * P1 * C1/ (K1 + C1 + eps) - sig * r2 * P2 * C2 / (K2 + C2 + eps)
-    kinetics_C3 =  sig*sigma * r2 * P2 * C2/ (K2 + C2 + eps) - sig * r3 * P3 * C3 / (K3 + C3 + eps)
+    kinetics_C1 = - 1/sig * r1 * P1 * C1 / (K1 + C1 + eps)
+    kinetics_C2 =  1/sig*sigma * r1 * P1 * C1/ (K1 + C1 + eps) - 1/sig * r2 * P2 * C2 / (K2 + C2 + eps)
+    kinetics_C3 =  1/sig*sigma * r2 * P2 * C2/ (K2 + C2 + eps) - 1/sig * r3 * P3 * C3 / (K3 + C3 + eps)
 
     dC1dt += kinetics_C1
     dC2dt += kinetics_C2
