@@ -51,7 +51,7 @@ More information on the numerical implementation can be found in the appendix of
 
 $$
 \frac{\partial P_i}{\partial t}
-= \nabla \cdot \big(D_i \nabla P_i - A_i P_i \nabla P_r \big) + P_i F_i(C, Pr).
+= \nabla \cdot \big(D_i \nabla P_i + A_i P_i \nabla P_r \big) + P_i F_i(C, Pr).
 $$
 
 **Substrate:**
